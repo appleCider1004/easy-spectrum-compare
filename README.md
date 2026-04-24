@@ -1,20 +1,17 @@
 # easy-spectrum-compare
-This is a light application for visualizing and comparing spectra under different experimental conditions.
-
-A Streamlit app for browsing, filtering, and plotting spectra with metadata-driven selection.  
-The app is designed for datasets where each spectrum is stored as a `.npy` file and each file is described by a row in a metadata CSV.
+This is a set of Streamlit apps for browsing, filtering, and plotting spectra for different types of measurements with metadata-driven selection.  
+The apps are designed for datasets where each spectrum is stored as a `.npy` file and each file is described by a row in a metadata CSV.
 
 ## Features
 
-- Load metadata and spectrum directories from the UI
-- Filter spectra by metadata attributes
+- Load metadata directory from the UI
+- Filter spectra by metadata attributes (e.g. experimental conditions)
 - Select multiple spectra from filtered results
-- Overlay multiple spectra in one Plotly figure
+- Overlay multiple spectra in one figure for the purpose of comparison
 - Customize line labels and colors
 - Switch to log scale
-- Adjust x-axis plotting range
-- Plot spectral differences relative to a selected reference
-- Cache metadata and spectrum loading for faster reruns
+- Adjust frequency range for plotting
+- Plot spectral differences relative to a selected baseline spectrum
 
 ## Repository structure
 
@@ -24,8 +21,13 @@ The app is designed for datasets where each spectrum is stored as a `.npy` file 
 ├── README.md
 ├── requirements.txt
 └── data/
-    ├── metadata.csv
-    └── spectra_npy/
+    ├──metadata1.csv
+    ├──metadata2.csv
+    └── spectra_npy_samples1/
+        ├── sample_001.npy
+        ├── sample_002.npy
+        └── ...
+    └── spectra_npy_samples2/
         ├── sample_001.npy
         ├── sample_002.npy
         └── ...
@@ -40,12 +42,12 @@ A CSV file containing one row per spectrum.
 
 Example columns:
 
-- `File_name`
-- `Date`
-- `Damage`
-- `RPM`
-- `Set_wind_speed`
-- `Work_as_turbine`
+- `File_name`: The corresponding data file names
+- `Damage`: Data attribute
+- `RPM`: Data attribute
+- `Set_wind_speed`: Data attribute
+- ...
+- `Path`: The corresponding data file paths
 
 ### 2. Spectrum files
 Each spectrum is stored as a `.npy` file.
@@ -94,7 +96,7 @@ Then open the local URL shown in the terminal.
 ## Usage
 
 1. Start the app.
-2. Enter the metadata CSV path and the `.npy` spectra folder path.
+2. Enter the metadata CSV path.
 3. Click **Load data**.
 4. Use the sidebar to filter spectra by metadata.
 5. Select records to plot.
@@ -105,7 +107,6 @@ Then open the local URL shown in the terminal.
 
 - All `.npy` files should have a consistent format and compatible x-axis definition.
 - Log-scale plotting requires positive x and y values.
-- Cached loading is used to improve responsiveness during reruns.
 
 ## Future improvements
 
@@ -120,4 +121,4 @@ Choose a license for this project, for example MIT.
 
 ## Author
 
-MUYAO LI
+Muyao Li
